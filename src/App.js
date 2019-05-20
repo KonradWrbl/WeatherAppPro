@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './style/App.css';
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
+import sun from './pics/1164891-weather/svg/046-sunny.svg'
 
 class App extends Component {
   constructor() {
@@ -19,8 +20,10 @@ class App extends Component {
           </button>
         </div>
 
-        <div className='content'>
-
+        <div className='contentContainer'>
+          <p className='city'>Rzeszów</p>
+          <div><p>23°27'N</p><p>23°27'S</p></div>
+          <img className='weather' src={sun}></img>
         </div>
       </div>
     );
