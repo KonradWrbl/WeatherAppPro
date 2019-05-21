@@ -2,13 +2,9 @@ import React, {Component} from 'react';
 import './style/App.css';
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
-import sun from './pics/1164891-weather/svg/046-sunny.svg'
+import CityComp from './components/CityComp'
 
 class App extends Component {
-  constructor() {
-    super()
-  }
-
   render() {
     return (
       <div className='mainContainer'>
@@ -19,12 +15,8 @@ class App extends Component {
             <img className='search' src={search} alt='search'></img>
           </button>
         </div>
+        <CityComp />
 
-        <div className='contentContainer'>
-          <p className='city'>Rzeszów</p>
-          <div><p>23°27'N</p><p>23°27'S</p></div>
-          <img className='weather' src={sun}></img>
-        </div>
       </div>
     );
   }
