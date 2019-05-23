@@ -4,36 +4,83 @@ import './style/CityComp.css'
 import CityComp from './components/CityComp'
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
+import axios from 'axios';
 
-let cityList = [
-
-]
+const API = '//api.openweathermap.org/data/2.5/';
 
 class App extends Component {
 
   constructor() {
     super()
     this.state = {
-
+      city: '',
+      isFetching: 0,
+      cityList: []
     }
+    this.addCity = this.addCity.bind(this);
+    this.cityValue = this.cityValue.bind(this);
+  }
+
+  addCity = () => {
+    console.log(this.state.city);
+
+    this.setState({isFetching: 1})
+
+    axios.get(`${API}weather?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
+      .then((response) => {
+        this.setState({cityList: this.state.cityList.concat(response)})
+        console.log(response);
+      })
+      .then((res) => {
+        this.setState({isFetching: 0});
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({isfetching: 0})
+      })
+  }
+
+  onEnterPress = (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      this.addCity();
+      console.log(this.state.cityList);
+    }
+  }
+
+  cityValue = (e) => {
+    this.setState({city: e.target.value})
   }
 
 
   render() {
+    const cities = this.state.cityList.map(input => {return(
+      <CityComp
+        name={input.data.name}
+        coord={input.data.coord}
+        temp={input.data.main.temp}
+        pressure={input.data.main.pressure}
+        key={input.data.id}
+      />
+    )})
     return (
       <div className='mainContainer'>
         <div className='searchBar'>
           <img className='setting' src={settings} alt='settings'></img>
-          <input className='searchInput' placeholder='Berlin'></input>
-          <button>
+          <input
+            className='searchInput'
+            placeholder='Berlin'
+            onChange={this.cityValue}
+            onClick={e => e.target.value=''}
+            onKeyDown={this.onEnterPress}
+          >
+          </input>
+          <button onClick={this.addCity}>
             <img className='search' src={search} alt='search'></img>
           </button>
         </div>
-        <CityComp/>
-        <CityComp/>
-        <CityComp/>
-        <CityComp/>
-        <CityComp/>
+        {cities}
+
       </div>
     );
   }

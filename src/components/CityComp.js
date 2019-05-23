@@ -7,8 +7,8 @@ import { transform } from '@babel/core';
 
 class CityComp extends Component {
 
-    constructor() {
-      super()
+    constructor(props) {
+      super(props)
       this.state = {
         expanded: 0
       }
@@ -27,16 +27,16 @@ class CityComp extends Component {
           className={this.state.expanded ? 'contentContainer1' : 'contentContainer2'}
           onClick = {this.expand}
           >
-            <p className='city'>Rzeszów</p>
+            <p className='city'>{this.props.name}</p>
             <div className='coords'>
               <p>23°27'N</p>
               <p>23°27'S</p></div>
             <img className='weather' src={sun} alt='weatherPic'></img>
             <div className='temperature'>
-              <div>23°C</div>
+              <div>{Math.round(this.props.temp-273.3)}°C</div>
               <div>Pogodnie</div>
             </div>
-            <div class='wind'>
+            <div className='wind'>
               <div>
                 <p>E</p>
                 <img className = 'windArrow' src={arrow} alt='windArrow'></img>
