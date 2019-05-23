@@ -1,10 +1,24 @@
 import React, {Component} from 'react';
 import './style/App.css';
+import './style/CityComp.css'
+import CityComp from './components/CityComp'
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
-import CityComp from './components/CityComp'
+
+let cityList = [
+
+]
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+
+    }
+  }
+
+
   render() {
     return (
       <div className='mainContainer'>
@@ -15,8 +29,11 @@ class App extends Component {
             <img className='search' src={search} alt='search'></img>
           </button>
         </div>
-        <CityComp />
-
+        <CityComp/>
+        <CityComp/>
+        <CityComp/>
+        <CityComp/>
+        <CityComp/>
       </div>
     );
   }
