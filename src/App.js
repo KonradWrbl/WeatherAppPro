@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       city: '',
       isFetching: 0,
-      cityList: []
+      cityList: [],
     }
     this.addCity = this.addCity.bind(this);
     this.cityValue = this.cityValue.bind(this);
@@ -23,12 +23,28 @@ class App extends Component {
 
   addCity = () => {
     console.log(this.state.city);
-
     this.setState({isFetching: 1})
+    let curr;
 
     axios.get(`${API}weather?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
+        curr = response;
+        //this.setState({cityList: this.state.cityList.concat(response)})
+        console.log(response);
+      })
+      .then((res) => {
+        //this.setState({isFetching: 0});
+      })
+      .catch(err => {
+        console.log(err);
+        //this.setState({isfetching: 0})
+      })
+
+      axios.get(`${API}forecast?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
+      .then((response) => {
+        Object.assign(response.data, curr.data)
         this.setState({cityList: this.state.cityList.concat(response)})
+        //this.setState({cityList: this.state.cityList.concat(response)})
         console.log(response);
       })
       .then((res) => {
@@ -41,9 +57,10 @@ class App extends Component {
   }
 
   onEnterPress = (e) => {
-    if(e.keyCode === 13 && e.shiftKey === false) {
+    if(e.keyCode === 13 && e.shiftKey === false && e.target.value !== '') {
       e.preventDefault();
       this.addCity();
+      e.target.value=''
       console.log(this.state.cityList);
     }
   }
@@ -60,6 +77,7 @@ class App extends Component {
         coord={input.data.coord}
         temp={input.data.main.temp}
         pressure={input.data.main.pressure}
+        weather={input.data.weather[0].main}
         key={input.data.id}
       />
     )})
