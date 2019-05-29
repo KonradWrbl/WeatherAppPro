@@ -5,7 +5,7 @@ import cloudsImg from '../pics/1164891-weather/svg/025-cloudy.svg';
 import rainImg from '../pics/1164891-weather/svg/049-rain.svg'
 import snowImg from '../pics/1164891-weather/svg/016-snow.svg'
 import fogImg from '../pics/1164891-weather/svg/050-fog.svg'
-import { transform } from '@babel/core';
+import { Animated } from 'react-animated-css'
 
 
 class CityComp extends Component {
@@ -56,44 +56,46 @@ class CityComp extends Component {
         }
 
         return(
-          <div
-          className={this.state.expanded ? 'contentContainer1' : 'contentContainer2'}
-          onClick = {this.expand}
-          >
-            <p className='city'>{this.props.name}</p>
-            <div className='coords'>
-              <p>23°27'N</p>
-              <p>23°27'S</p></div>
-            <img className='weather' src={weatherImgCurr()} alt='weatherPic'></img>
-            <div className='temperature'>
-              <div>{Math.round(this.props.temp-273.3)}°C</div>
-              <div>{weatherDescrCurr()}</div>
+          <Animated animationIn = 'fadeInDown' isVisible={true}>
+            <div
+            className={this.state.expanded ? 'contentContainer1' : 'contentContainer2'}
+            onClick = {this.expand}
+            >
+              <p className='city'>{this.props.name}</p>
+              <div className='coords'>
+                <p>23°27'N</p>
+                <p>23°27'S</p></div>
+              <img className='weather' src={weatherImgCurr()} alt='weatherPic'></img>
+              <div className='temperature'>
+                <div>{Math.round(this.props.temp-273.3)}°C</div>
+                <div>{weatherDescrCurr()}</div>
+              </div>
+              <div className='wind'>
+                <div>
+                  <p>W</p>
+                  <img className = 'windArrow' src={arrowImg} alt='windArrow'></img>
+                </div>
+                <p className='bar'>{this.props.pressure}hPa</p>
+              </div>
+              <div className='next3Days'>
+                <div>
+                  <div className='date3'>23.05</div>
+                  <img className='weather3' src={cloudsImg} alt='weather'></img>
+                  <div className='temp3'>20°C</div>
+                </div>
+                <div>
+                  <div className='date3'>23.05</div>
+                  <img className='weather3' src={cloudsImg} alt='weather'></img>
+                  <div className='temp3'>20°C</div>
+                </div>
+                <div>
+                  <div className='date3'>23.05</div>
+                  <img className='weather3' src={cloudsImg} alt='weather'></img>
+                  <div className='temp3'>20°C</div>
+                </div>
+              </div>
             </div>
-            <div className='wind'>
-              <div>
-                <p>W</p>
-                <img className = 'windArrow' src={arrowImg} alt='windArrow'></img>
-              </div>
-              <p className='bar'>{this.props.pressure}hPa</p>
-            </div>
-            <div className='next3Days'>
-              <div>
-                <div className='date3'>23.05</div>
-                <img className='weather3' src={cloudsImg} alt='weather'></img>
-                <div className='temp3'>20°C</div>
-              </div>
-              <div>
-                <div className='date3'>23.05</div>
-                <img className='weather3' src={cloudsImg} alt='weather'></img>
-                <div className='temp3'>20°C</div>
-              </div>
-              <div>
-                <div className='date3'>23.05</div>
-                <img className='weather3' src={cloudsImg} alt='weather'></img>
-                <div className='temp3'>20°C</div>
-              </div>
-            </div>
-          </div>
+          </Animated>
         );
     }
 

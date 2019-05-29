@@ -6,6 +6,7 @@ import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
 import axios from 'axios';
 
+
 const API = '//api.openweathermap.org/data/2.5/';
 
 class App extends Component {
