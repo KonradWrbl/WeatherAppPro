@@ -16,10 +16,15 @@ class App extends Component {
     this.state = {
       city: '',
       isFetching: 0,
-      cityList: [],
+      cityList: []
     }
     this.addCity = this.addCity.bind(this);
     this.cityValue = this.cityValue.bind(this);
+    this.deleteComp = this.deleteComp.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({cityList: JSON.parse(localStorage.getItem('cityList'))})
   }
 
   addCity = () => {
@@ -44,7 +49,7 @@ class App extends Component {
       axios.get(`${API}forecast?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
         Object.assign(response.data, curr.data)
-        this.setState({cityList: this.state.cityList.concat(response)})
+        this.setState({cityList: this.state.cityList.concat(response)}, () => {localStorage.setItem('cityList', JSON.stringify(this.state.cityList))})
         //this.setState({cityList: this.state.cityList.concat(response)})
         console.log(response);
       })
@@ -55,6 +60,8 @@ class App extends Component {
         console.log(err);
         this.setState({isfetching: 0})
       })
+
+
   }
 
   onEnterPress = (e) => {
@@ -70,10 +77,31 @@ class App extends Component {
     this.setState({city: e.target.value})
   }
 
+  deleteComp = (e) => {
+    let index;
+
+    for(let i=0; i<this.state.cityList.length; i++) {
+      if(this.state.cityList[i].data.name === e.target.parentNode.id) {
+        index = i;
+        break;
+      }
+    }
+
+    this.state.cityList.splice(index,1)
+    e.target.parentNode.remove();
+    //this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
+
+    console.log(e.target.parentNode.id);
+    //console.log(this.state.cityList[0].data.name);
+    console.log(index);
+  }
+
 
   render() {
+
     const cities = this.state.cityList.map(input => {return(
       <CityComp
+        deleteFoo={this.deleteComp}
         name={input.data.name}
         coord={input.data.coord}
         temp={input.data.main.temp}
@@ -83,6 +111,7 @@ class App extends Component {
         key={input.data.id}
       />
     )})
+
     return (
       <div className='mainContainer'>
         <div className='searchBar'>

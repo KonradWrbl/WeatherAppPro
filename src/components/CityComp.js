@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import sunImg from '../pics/1164891-weather/svg/046-sunny.svg';
 import arrowImg from '../pics/arrow-pointing-to-right.svg';
+import removeCross from '../pics/delete.svg'
 import cloudsImg from '../pics/1164891-weather/svg/025-cloudy.svg';
 import rainImg from '../pics/1164891-weather/svg/049-rain.svg'
 import snowImg from '../pics/1164891-weather/svg/016-snow.svg'
@@ -16,9 +17,12 @@ class CityComp extends Component {
         expanded: 0
       }
       this.expand = this.expand.bind(this);
+      this.delete = this.delete.bind(this);
     }
 
-
+    delete = (e) => {
+      this.props.deleteFoo(e);
+    }
 
     expand = () => {
       this.setState(prevState => ({expanded: !prevState.expanded}));
@@ -102,14 +106,17 @@ class CityComp extends Component {
           const month = date.getMonth()+1;
           if(month<10) return day+'.0'+month;
           return day+'.'+month;
-
         }
+
+
 
         return(
           <Animated animationIn = 'fadeInDown' isVisible={true} animationInDelay={3000} animationInDuration={3000}>
             <div
+            id={this.props.name}
             className={this.state.expanded ? 'contentContainer1' : 'contentContainer2'}
             onClick = {this.expand}
+
             >
               <p className='city'>{this.props.name}</p>
               <div className='coords'>
@@ -144,12 +151,11 @@ class CityComp extends Component {
                   <div className='temp3'>{weatherInNextDays(2)}°C</div>
                 </div>
               </div>
+              <img onClick = {this.delete} className='removeCross' src={removeCross} alt='remove'></img>
             </div>
           </Animated>
         );
     }
-
-
 }
 
 export default CityComp;
