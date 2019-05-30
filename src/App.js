@@ -60,8 +60,6 @@ class App extends Component {
         console.log(err);
         this.setState({isfetching: 0})
       })
-
-
   }
 
   onEnterPress = (e) => {
