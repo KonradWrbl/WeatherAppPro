@@ -23,9 +23,9 @@ class App extends Component {
     this.deleteComp = this.deleteComp.bind(this)
   }
 
-  // componentDidMount() {
-  //   this.setState({cityList: JSON.parse(localStorage.getItem('cityList'))})
-  // }
+  componentDidMount() {
+    this.setState({cityList: JSON.parse(localStorage.getItem('cityList'))})
+  }
 
   addCity = () => {
     console.log(this.state.city);
@@ -49,7 +49,7 @@ class App extends Component {
       axios.get(`${API}forecast?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
         Object.assign(response.data, curr.data)
-        this.setState({cityList: this.state.cityList.concat(response)})
+        this.setState({cityList: this.state.cityList.concat(response)}, () => {localStorage.setItem('cityList', JSON.stringify(this.state.cityList))})
         //this.setState({cityList: this.state.cityList.concat(response)})
         console.log(response);
       })
@@ -87,8 +87,9 @@ class App extends Component {
       }
     }
 
-    this.state.cityList.splice(index,1)
+    this.state.cityList.splice(index,1);
     e.target.parentNode.remove();
+    localStorage.setItem('cityList', JSON.stringify(this.state.cityList));
     //this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
 
     console.log(e.target.parentNode.id);
