@@ -79,6 +79,7 @@ class App extends Component {
         temp={input.data.main.temp}
         pressure={input.data.main.pressure}
         weather={input.data.weather[0].main}
+        ThreeDaysWeather={input.data.list}
         key={input.data.id}
       />
     )})
