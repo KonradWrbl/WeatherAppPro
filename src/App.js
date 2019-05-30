@@ -49,7 +49,7 @@ class App extends Component {
       axios.get(`${API}forecast?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
         Object.assign(response.data, curr.data)
-        this.setState({cityList: this.state.cityList.concat(response)}})
+        this.setState({cityList: this.state.cityList.concat(response)})
         //this.setState({cityList: this.state.cityList.concat(response)})
         console.log(response);
       })
