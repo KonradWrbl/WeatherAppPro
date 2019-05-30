@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({cityList: JSON.parse(localStorage.getItem('cityList'))})
+    this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
   }
 
   addCity = () => {
