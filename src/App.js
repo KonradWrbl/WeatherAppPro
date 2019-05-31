@@ -20,7 +20,8 @@ class App extends Component {
     }
     this.addCity = this.addCity.bind(this);
     this.cityValue = this.cityValue.bind(this);
-    this.deleteComp = this.deleteComp.bind(this)
+    this.deleteComp = this.deleteComp.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
@@ -31,10 +32,11 @@ class App extends Component {
         this.addCity(cities[i].data.name)
       }
     } else {this.setState({cityList: []})}
-
-
-
     //this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
+  }
+
+  onSearch = () => {
+    this.addCity(this.state.city);
   }
 
   addCity = (name) => {
@@ -134,7 +136,7 @@ class App extends Component {
             onKeyDown={this.onEnterPress}
           >
           </input>
-          <button onClick={this.addCity}>
+          <button onClick={this.onSearch}>
             <img className='search' src={search} alt='search'></img>
           </button>
         </div>
