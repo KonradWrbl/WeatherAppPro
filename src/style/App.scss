@@ -6,6 +6,11 @@
 html, body {
     margin: 0;
     padding: 0;
+
+    @media (min-width: 1250px) {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
@@ -16,6 +21,7 @@ html, body {
     margin: 6vw;
 
     @media (min-width: 1250px) {
+        max-width: 900px;
         margin: 25px 2.7vw 2.7vw 2.7vw;
     }
 }

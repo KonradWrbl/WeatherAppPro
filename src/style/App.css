@@ -10,12 +10,24 @@ html, body {
   padding: 0;
 }
 
+@media (min-width: 1250px) {
+  html, body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
 .mainContainer {
   margin: 6vw;
 }
 
 @media (min-width: 1250px) {
   .mainContainer {
+    max-width: 900px;
     margin: 25px 2.7vw 2.7vw 2.7vw;
   }
 }

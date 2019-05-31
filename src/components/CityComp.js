@@ -8,7 +8,6 @@ import snowImg from '../pics/1164891-weather/svg/016-snow.svg'
 import fogImg from '../pics/1164891-weather/svg/050-fog.svg'
 import { Animated } from 'react-animated-css'
 
-
 class CityComp extends Component {
 
     constructor(props) {
@@ -18,6 +17,7 @@ class CityComp extends Component {
       }
       this.expand = this.expand.bind(this);
       this.delete = this.delete.bind(this);
+      this.setWindArrow = this.setWindArrow.bind(this);
     }
 
     delete = (e) => {
@@ -26,6 +26,14 @@ class CityComp extends Component {
 
     expand = () => {
       this.setState(prevState => ({expanded: !prevState.expanded}));
+    }
+
+    setWindArrow = () => {
+      let deg = this.props.wind
+      let arrowStyle = {
+        transform: `rotate(${deg-90}deg)`,
+      }
+      return arrowStyle;
     }
 
     render() {
@@ -130,7 +138,7 @@ class CityComp extends Component {
               <div className='wind'>
                 <div>
                   <p>W</p>
-                  <img className = 'windArrow' src={arrowImg} alt='windArrow'></img>
+                  <img className = 'windArrow' style={this.setWindArrow()} src={arrowImg} alt='windArrow'></img>
                 </div>
                 <p className='bar'>{this.props.pressure}hPa</p>
               </div>
