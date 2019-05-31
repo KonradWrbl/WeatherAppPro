@@ -18,6 +18,7 @@ class CityComp extends Component {
       this.expand = this.expand.bind(this);
       this.delete = this.delete.bind(this);
       this.setWindArrow = this.setWindArrow.bind(this);
+      this.coordsConversion = this.coordsConversion.bind(this);
     }
 
     delete = (e) => {
@@ -36,7 +37,42 @@ class CityComp extends Component {
       return arrowStyle;
     }
 
+    coordsConversion = () => {
+      const coords = this.props.coord;
+      let coord = {};
+      if(coords.lon > 0) {
+        let deg, min, sec;
+        deg = Math.floor(coords.lon);
+        min = Math.floor((coords.lon - deg)*60)
+        sec = Math.floor((((coords.lon - deg)*60)-min)*60);
+        coord.lon = `${deg}°${min}'${sec}"E`;
+      } else {
+        let deg, min, sec;
+        deg = Math.floor(coords.lon);
+        min = Math.floor((coords.lon - deg)*60)
+        sec = Math.floor((((coords.lon - deg)*60)-min)*60);
+        coord.lon = `${deg}°${min}'${sec}"W`;
+      }
+      if(coords.lat > 0) {
+        let deg, min, sec;
+        deg = Math.floor(coords.lat);
+        min = Math.floor((coords.lat - deg)*60)
+        sec = Math.floor((((coords.lat - deg)*60)-min)*60);
+        coord.lat = `${deg}°${min}'${sec}"N`;
+      } else {
+        let deg, min, sec;
+        deg = Math.floor(coords.lat);
+        min = Math.floor((coords.lat - deg)*60)
+        sec = Math.floor((((coords.lat - deg)*60)-min)*60);
+        coord.lat = `${deg}°${min}'${sec}"S`;
+      }
+      return coord;
+    }
+
     render() {
+
+        this.coordsConversion()
+
         const weatherImgCurr = () => {
           let cloudy = this.props.weather;
           if (cloudy === 'Clear') {
@@ -128,8 +164,8 @@ class CityComp extends Component {
             >
               <p className='city'>{this.props.name}</p>
               <div className='coords'>
-                <p>23°27'N</p>
-                <p>23°27'S</p></div>
+                <p>{this.coordsConversion().lat}</p>
+                <p>{this.coordsConversion().lon}</p></div>
               <img className='weather' src={weatherImgCurr()} alt='weatherPic'></img>
               <div className='temperature'>
                 <div>{Math.round(this.props.temp-273.3)}°C</div>
