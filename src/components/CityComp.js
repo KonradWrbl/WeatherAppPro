@@ -19,6 +19,7 @@ class CityComp extends Component {
       this.delete = this.delete.bind(this);
       this.setWindArrow = this.setWindArrow.bind(this);
       this.coordsConversion = this.coordsConversion.bind(this);
+      this.windRouteName = this.windRouteName.bind(this);
     }
 
     delete = (e) => {
@@ -37,6 +38,19 @@ class CityComp extends Component {
       return arrowStyle;
     }
 
+    windRouteName = () => {
+      let deg = this.props.wind;
+      if(deg < 22.5) return 'S';
+      else if(deg < 67.5) return 'SW';
+      else if(deg < 112.5) return 'W';
+      else if(deg < 157.5) return 'NW';
+      else if(deg < 202.5) return 'N';
+      else if(deg < 247.5) return 'NE';
+      else if(deg < 292.5) return 'E';
+      else if(deg < 337.5) return 'SE';
+      else return 'S';
+    }
+
     coordsConversion = () => {
       const coords = this.props.coord;
       let coord = {};
@@ -51,7 +65,7 @@ class CityComp extends Component {
         deg = Math.floor(coords.lon);
         min = Math.floor((coords.lon - deg)*60)
         sec = Math.floor((((coords.lon - deg)*60)-min)*60);
-        coord.lon = `${deg}°${min}'${sec}"W`;
+        coord.lon = `${Math.abs(deg)}°${min}'${sec}"W`;
       }
       if(coords.lat > 0) {
         let deg, min, sec;
@@ -64,7 +78,7 @@ class CityComp extends Component {
         deg = Math.floor(coords.lat);
         min = Math.floor((coords.lat - deg)*60)
         sec = Math.floor((((coords.lat - deg)*60)-min)*60);
-        coord.lat = `${deg}°${min}'${sec}"S`;
+        coord.lat = `${Math.abs(deg)}°${min}'${sec}"S`;
       }
       return coord;
     }
@@ -173,7 +187,7 @@ class CityComp extends Component {
               </div>
               <div className='wind'>
                 <div>
-                  <p>W</p>
+                  <p>{this.windRouteName()}</p>
                   <img className = 'windArrow' style={this.setWindArrow()} src={arrowImg} alt='windArrow'></img>
                 </div>
                 <p className='bar'>{this.props.pressure}hPa</p>
