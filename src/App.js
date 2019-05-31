@@ -24,15 +24,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
+
+    let cities = JSON.parse(localStorage.getItem('cityList'));
+    if(cities) {
+      for(let i = 0; i < cities.length; i++) {
+        this.addCity(cities[i].data.name)
+      }
+    } else {this.setState({cityList: []})}
+
+
+
+    //this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
   }
 
-  addCity = () => {
-    console.log(this.state.city);
+  addCity = (name) => {
+    console.log(name);
     this.setState({isFetching: 1})
     let curr;
 
-    axios.get(`${API}weather?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
+    axios.get(`${API}weather?q=${name}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
         curr = response;
         //this.setState({cityList: this.state.cityList.concat(response)})
@@ -46,7 +56,7 @@ class App extends Component {
         //this.setState({isfetching: 0})
       })
 
-      axios.get(`${API}forecast?q=${this.state.city}&appid=e86ba166de2e36b28f351cc82f422e7f`)
+      axios.get(`${API}forecast?q=${name}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
         Object.assign(response.data, curr.data)
         this.setState({cityList: this.state.cityList.concat(response)}, () => {localStorage.setItem('cityList', JSON.stringify(this.state.cityList))})
@@ -65,7 +75,7 @@ class App extends Component {
   onEnterPress = (e) => {
     if(e.keyCode === 13 && e.shiftKey === false && e.target.value !== '') {
       e.preventDefault();
-      this.addCity();
+      this.addCity(this.state.city);
       e.target.value=''
       console.log(this.state.cityList);
     }

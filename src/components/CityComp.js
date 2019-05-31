@@ -136,17 +136,17 @@ class CityComp extends Component {
               </div>
               <div className='next3Days'>
                 <div>
-                  <div className='date3'>{nextDaysDate(0)}</div>
+                  <div className='date3'>{nextDaysDate(1)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(0)} alt='weather'></img>
                   <div className='temp3'>{weatherInNextDays(0)}°C</div>
                 </div>
                 <div>
-                  <div className='date3'>{nextDaysDate(1)}</div>
+                  <div className='date3'>{nextDaysDate(2)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(1)} alt='weather'></img>
                   <div className='temp3'>{weatherInNextDays(1)}°C</div>
                 </div>
                 <div>
-                  <div className='date3'>{nextDaysDate(2)}</div>
+                  <div className='date3'>{nextDaysDate(3)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(2)} alt='weather'></img>
                   <div className='temp3'>{weatherInNextDays(2)}°C</div>
                 </div>
