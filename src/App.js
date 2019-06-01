@@ -31,12 +31,14 @@ class App extends Component {
   componentDidMount() {
 
     let cities = JSON.parse(localStorage.getItem('cityList'));
-    if(cities) {
+    if(cities && Online) {
       for(let i = 0; i < cities.length; i++) {
         this.addCity(cities[i].data.name)
       }
-    } else {this.setState({cityList: []})}
-    //this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
+    } else if(cities && Offline) {
+      this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
+    }
+    else {this.setState({cityList: []})}
   }
 
   onSearch = () => {
