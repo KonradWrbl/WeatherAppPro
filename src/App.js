@@ -66,9 +66,9 @@ class App extends Component {
       })
       .catch(err => {
         console.log(err);
-        if(Online && err.request) {
-          this.setState({cityNotFoundErr: 1})
-        }
+        // if(Online && err.request) {
+        //   this.setState({cityNotFoundErr: 1})
+        // }
         //this.setState({isfetching: 0})
       })
 
