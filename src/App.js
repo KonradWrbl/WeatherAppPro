@@ -6,7 +6,6 @@ import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
 import axios from 'axios';
 import SweetAlert from 'sweetalert2-react';
-import { Offline, Online } from "react-detect-offline";
 
 
 const API = '//api.openweathermap.org/data/2.5/';
@@ -30,15 +29,17 @@ class App extends Component {
 
   componentDidMount() {
 
+    console.log(window.navigator.onLine);
+
     let cities = JSON.parse(localStorage.getItem('cityList'));
-    if(cities && Online) {
+    if(!cities && window.navigator.onLine) {
       for(let i = 0; i < cities.length; i++) {
         this.addCity(cities[i].data.name)
       }
-    } else if(cities && Offline) {
+    } else {
       this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
     }
-    else {this.setState({cityList: []})}
+    //else {this.setState({cityList: []})}
   }
 
   onSearch = () => {
@@ -68,9 +69,9 @@ class App extends Component {
       })
       .catch(err => {
         console.log(err);
-        // if(Online && err.request) {
-        //   this.setState({cityNotFoundErr: 1})
-        // }
+        if(window.navigator.onLine && err.request) {
+          this.setState({cityNotFoundErr: 1})
+        }
         //this.setState({isfetching: 0})
       })
 
