@@ -55,7 +55,8 @@ input[type=radio] {
 
 label {
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 700;
+  font-size: 1.2em;
 }
 
 .check {
