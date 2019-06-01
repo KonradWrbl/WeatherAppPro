@@ -5,6 +5,7 @@ import CityComp from './components/CityComp'
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
 import axios from 'axios';
+import SweetAlert from 'sweetalert2-react'
 
 
 const API = '//api.openweathermap.org/data/2.5/';
@@ -16,7 +17,9 @@ class App extends Component {
     this.state = {
       city: '',
       isFetching: 0,
-      cityList: []
+      cityList: [],
+      cityNotFoundErr: 0,
+      doubleCity: 0
     }
     this.addCity = this.addCity.bind(this);
     this.cityValue = this.cityValue.bind(this);
@@ -46,6 +49,13 @@ class App extends Component {
 
     axios.get(`${API}weather?q=${name}&appid=e86ba166de2e36b28f351cc82f422e7f`)
       .then((response) => {
+        for(let i=0; i<this.state.cityList.length; i++) {
+          if(this.state.cityList[i].data.id === response.data.id) {
+            this.setState({doubleCity: 1})
+            console.log('wykryto duplikację');
+            return
+          }
+        }
         curr = response;
         //this.setState({cityList: this.state.cityList.concat(response)})
         console.log(response);
@@ -55,6 +65,7 @@ class App extends Component {
       })
       .catch(err => {
         console.log(err);
+        if(err.request) this.setState({cityNotFoundErr: 1})
         //this.setState({isfetching: 0})
       })
 
@@ -110,7 +121,9 @@ class App extends Component {
 
   render() {
 
-    const cities = this.state.cityList.map(input => {return(
+    const cities = this.state.cityList.map(input => {
+
+      return(
       <CityComp
         deleteFoo={this.deleteComp}
         name={input.data.name}
@@ -141,7 +154,20 @@ class App extends Component {
           </button>
         </div>
         {cities}
-
+        <SweetAlert
+          show={this.state.cityNotFoundErr}
+          type='error'
+          title='Ups..'
+          text='Nie udało nam się znaleźć podanego miasta.'
+          onConfirm={() => this.setState({ cityNotFoundErr: 0 })}
+        />
+        <SweetAlert
+          show={this.state.doubleCity}
+          type='warning'
+          //title='Ups..'
+          text='To miasto już znajduje się na liście.'
+          onConfirm={() => this.setState({ doubleCity: 0 })}
+        />
       </div>
     );
   }

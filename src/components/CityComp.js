@@ -6,7 +6,6 @@ import cloudsImg from '../pics/1164891-weather/svg/025-cloudy.svg';
 import rainImg from '../pics/1164891-weather/svg/049-rain.svg'
 import snowImg from '../pics/1164891-weather/svg/016-snow.svg'
 import fogImg from '../pics/1164891-weather/svg/050-fog.svg'
-import { Animated } from 'react-animated-css'
 
 class CityComp extends Component {
 
@@ -169,7 +168,6 @@ class CityComp extends Component {
 
 
         return(
-          <Animated animationIn = 'fadeInDown' isVisible={true} animationInDelay={3000} animationInDuration={3000}>
             <div
             id={this.props.name}
             className={this.state.expanded ? 'contentContainer1' : 'contentContainer2'}
@@ -211,7 +209,6 @@ class CityComp extends Component {
               </div>
               <img onClick = {this.delete} className='removeCross' src={removeCross} alt='remove'></img>
             </div>
-          </Animated>
         );
     }
 }
