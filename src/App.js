@@ -5,7 +5,8 @@ import CityComp from './components/CityComp'
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
 import axios from 'axios';
-import SweetAlert from 'sweetalert2-react'
+import SweetAlert from 'sweetalert2-react';
+import { Offline, Online } from "react-detect-offline";
 
 
 const API = '//api.openweathermap.org/data/2.5/';
@@ -65,7 +66,9 @@ class App extends Component {
       })
       .catch(err => {
         console.log(err);
-        //if(err.request) this.setState({cityNotFoundErr: 1})
+        if(Online && err.request) {
+          this.setState({cityNotFoundErr: 1})
+        }
         //this.setState({isfetching: 0})
       })
 
