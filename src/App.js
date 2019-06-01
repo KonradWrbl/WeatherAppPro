@@ -32,7 +32,7 @@ class App extends Component {
     console.log(window.navigator.onLine);
 
     let cities = JSON.parse(localStorage.getItem('cityList'));
-    if(!cities && window.navigator.onLine) {
+    if(cities && window.navigator.onLine) {
       for(let i = 0; i < cities.length; i++) {
         this.addCity(cities[i].data.name)
       }
