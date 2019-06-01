@@ -36,6 +36,7 @@
   font-size: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .contentContainer1 .temperature {
@@ -193,6 +194,7 @@
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;

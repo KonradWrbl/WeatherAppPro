@@ -53,16 +53,17 @@ class App extends Component {
       this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
     }
 
-    this.setState({scale: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : 0})
+    this.setState({scale: JSON.parse(localStorage.getItem('scale'))})
     //else {this.setState({cityList: []})}
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('scale', JSON.stringify(this.state.scale))
-  }
+  // componentDidUpdate() {
+  //   localStorage.setItem('scale', JSON.stringify(this.state.scale))
+  // }
 
   scaleChange = () => {
     this.setState(prevState => ({scale: !prevState.scale}))
+    localStorage.setItem('scale', JSON.stringify(!this.state.scale))
   }
 
   setRoute = () => {
@@ -89,7 +90,7 @@ class App extends Component {
         }
         curr = response;
         //this.setState({cityList: this.state.cityList.concat(response)})
-        console.log(response);
+        //console.log(response);
       })
       .then((res) => {
         //this.setState({isFetching: 0});
@@ -107,7 +108,7 @@ class App extends Component {
         Object.assign(response.data, curr.data)
         this.setState({cityList: this.state.cityList.concat(response)}, () => {localStorage.setItem('cityList', JSON.stringify(this.state.cityList))})
         //this.setState({cityList: this.state.cityList.concat(response)})
-        console.log(response);
+        //console.log(response);
       })
       .then((res) => {
         this.setState({isFetching: 0});
@@ -144,17 +145,15 @@ class App extends Component {
     this.state.cityList.splice(index,1);
     e.target.parentNode.remove();
     localStorage.setItem('cityList', JSON.stringify(this.state.cityList));
-    this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
+    //this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
 
     console.log(e.target.parentNode.id);
     //console.log(this.state.cityList[0].data.name);
-    //console.log(index);
+    console.log(index);
   }
 
 
   render() {
-
-
 
     const cities = this.state.cityList.map(input => {
 

@@ -29,6 +29,7 @@
         font-size: 40px;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     & .temperature {
@@ -154,6 +155,7 @@
         text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
         order: 1
     }
 
