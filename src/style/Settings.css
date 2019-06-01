@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* Variables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --primary-c: #2196F3;
+  --secondary-c: #B2D7F5;
+  --white: #FDFBFB;
+  --text: #082943;
+  --bg: var(--primary-c);
+}
+
+/* Basic Config
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul {
+  list-style-type: none;
+  padding-left: 50px;
+  margin: 0;
+}
+
+li {
+  display: block;
+  position: relative;
+  padding: 20px 0px;
+}
+
+h2 {
+  margin: 10px 0;
+  font-weight: 900;
+}
+
+/* Card
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: var(--white);
+  width: 300px;
+  padding: 20px 25px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.13);
+          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.13);
+}
+
+/* Radio Button
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+
+label {
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.check {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: -webkit-transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), -webkit-transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Reset */
+input#one ~ .check {
+  -webkit-transform: translate(-50px, -25px);
+          transform: translate(-50px, -25px);
+  background: var(--secondary-c);
+}
+
+input#two ~ .check {
+  -webkit-transform: translate(-50px, -83px);
+          transform: translate(-50px, -83px);
+  background: var(--primary-c);
+  -webkit-box-shadow: 0 6px 12px rgba(33, 150, 243, 0.35);
+          box-shadow: 0 6px 12px rgba(33, 150, 243, 0.35);
+}
+
+/* Radio Input #1 */
+input#one:checked ~ .check {
+  -webkit-transform: translate(-50px, 33px);
+          transform: translate(-50px, 33px);
+}
+
+/* Radio Input #2  */
+input#two:checked ~ .check {
+  -webkit-transform: translate(-50px, -25px);
+          transform: translate(-50px, -25px);
+}
+/*# sourceMappingURL=Settings.css.map */

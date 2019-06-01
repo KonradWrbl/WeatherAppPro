@@ -19,6 +19,7 @@ class CityComp extends Component {
       this.setWindArrow = this.setWindArrow.bind(this);
       this.coordsConversion = this.coordsConversion.bind(this);
       this.windRouteName = this.windRouteName.bind(this);
+      this.temperature = this.temperature.bind(this)
     }
 
     delete = (e) => {
@@ -27,6 +28,16 @@ class CityComp extends Component {
 
     expand = () => {
       this.setState(prevState => ({expanded: !prevState.expanded}));
+    }
+
+    temperature = () => {
+      let temp
+      if(!this.props.scale) {
+        temp = this.props.temp - 273.3
+      } else {
+        temp = this.props.temp * (9/5) - 459.67
+      }
+      return temp
     }
 
     setWindArrow = () => {
@@ -180,7 +191,7 @@ class CityComp extends Component {
                 <p>{this.coordsConversion().lon}</p></div>
               <img className='weather' src={weatherImgCurr()} alt='weatherPic'></img>
               <div className='temperature'>
-                <div>{Math.round(this.props.temp-273.3)}°C</div>
+                <div>{Math.round(this.props.scale ? this.props.temp * (9/5) - 459.67 : this.props.temp - 273.3)}{this.props.scale ? '°F' : '°C'}</div>
                 <div>{weatherDescrCurr()}</div>
               </div>
               <div className='wind'>
@@ -194,17 +205,17 @@ class CityComp extends Component {
                 <div>
                   <div className='date3'>{nextDaysDate(1)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(0)} alt='weather'></img>
-                  <div className='temp3'>{weatherInNextDays(0)}°C</div>
+                  <div className='temp3'>{weatherInNextDays(0)}{this.props.scale ? '°F' : '°C'}</div>
                 </div>
                 <div>
                   <div className='date3'>{nextDaysDate(2)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(1)} alt='weather'></img>
-                  <div className='temp3'>{weatherInNextDays(1)}°C</div>
+                  <div className='temp3'>{weatherInNextDays(1)}{this.props.scale ? '°F' : '°C'}</div>
                 </div>
                 <div>
                   <div className='date3'>{nextDaysDate(3)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(2)} alt='weather'></img>
-                  <div className='temp3'>{weatherInNextDays(2)}°C</div>
+                  <div className='temp3'>{weatherInNextDays(2)}{this.props.scale ? '°F' : '°C'}°C</div>
                 </div>
               </div>
               <img onClick = {this.delete} className='removeCross' src={removeCross} alt='remove'></img>

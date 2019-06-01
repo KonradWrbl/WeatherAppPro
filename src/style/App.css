@@ -50,20 +50,48 @@ html, body {
 }
 
 .searchBar .setting {
-  display: none;
+  height: 90%;
 }
 
-.searchBar button {
+.searchBar .setBtn {
+  height: 100%;
+  width: 15vw;
+  border: none;
+  background: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.searchBar .setBtn img {
+  opacity: .7;
+  height: 60%;
+}
+
+.searchBar .srcBtn {
   position: absolute;
-  right: 2vw;
+  right: 14vw;
   height: 100%;
   border: none;
   background: none;
 }
 
-.searchBar button img {
+.searchBar .srcBtn img {
   opacity: .7;
+  height: 55%;
+}
+
+.searchBar .srcBtn .setting {
+  right: 20vw;
   height: 45%;
+  border: none;
+  background: none;
 }
 
 @media (min-width: 1250px) {

@@ -36,19 +36,41 @@ html, body {
     align-items: center;
 
     & .setting {
-        display: none;
+        height: 90%;
     }
 
-    & button {
+    & .setBtn {
+        height:100%;
+        width: 15vw;
+        border: none;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+            opacity: .7;
+            height: 60%;
+        }
+    }
+
+    & .srcBtn {
         position: absolute;
-        right: 2vw;
+        right: 14vw;
         height: 100%;
         border: none;
         background: none;
 
         & img {
             opacity: .7;
+            height: 55%;
+        }
+
+        & .setting {
+            right: 20vw;
             height: 45%;
+            border: none;
+            background: none;
         }
     }
 

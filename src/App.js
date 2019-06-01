@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import './style/App.css';
 import './style/CityComp.css'
+import './style/Settings.css'
 import CityComp from './components/CityComp'
+import CityList from './components/CityList'
+import Settings from './components/Settings'
 import settings from './pics/settings-work-tool.svg';
 import search from './pics/search.svg';
 import axios from 'axios';
 import SweetAlert from 'sweetalert2-react';
+import { Route, Link, Switch } from 'react-router-dom';
+import posed, { PoseGroup } from 'react-pose';
 
+const RouteContainer = posed.div({
+  enter: { opacity: 1, delay: 300, beforeChildren: true },
+  exit: { opacity: 0 }
+});
 
 const API = '//api.openweathermap.org/data/2.5/';
 
@@ -19,12 +28,16 @@ class App extends Component {
       isFetching: 0,
       cityList: [],
       cityNotFoundErr: 0,
-      doubleCity: 0
+      doubleCity: 0,
+      scale: 0,
+      routeDir: 1
     }
     this.addCity = this.addCity.bind(this);
     this.cityValue = this.cityValue.bind(this);
     this.deleteComp = this.deleteComp.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.setRoute = this.setRoute.bind(this);
+    this.scaleChange = this.scaleChange.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +52,21 @@ class App extends Component {
     } else {
       this.setState({cityList: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : []})
     }
+
+    this.setState({scale: JSON.parse(localStorage.getItem('cityList')) ? JSON.parse(localStorage.getItem('cityList')) : 0})
     //else {this.setState({cityList: []})}
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('scale', JSON.stringify(this.state.scale))
+  }
+
+  scaleChange = () => {
+    this.setState(prevState => ({scale: !prevState.scale}))
+  }
+
+  setRoute = () => {
+    this.setState(prevState => ({routeDir: !prevState.routeDir}))
   }
 
   onSearch = () => {
@@ -117,15 +144,17 @@ class App extends Component {
     this.state.cityList.splice(index,1);
     e.target.parentNode.remove();
     localStorage.setItem('cityList', JSON.stringify(this.state.cityList));
-    //this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
+    this.setState(prevState => ({cityList: prevState.cityList.splice(index,1)}))
 
     console.log(e.target.parentNode.id);
     //console.log(this.state.cityList[0].data.name);
-    console.log(index);
+    //console.log(index);
   }
 
 
   render() {
+
+
 
     const cities = this.state.cityList.map(input => {
 
@@ -139,6 +168,7 @@ class App extends Component {
         weather={input.data.weather[0].main}
         ThreeDaysWeather={input.data.list}
         wind={input.data.wind.deg}
+        scale={this.state.scale}
         key={input.data.id}
       />
     )})
@@ -146,7 +176,6 @@ class App extends Component {
     return (
       <div className='mainContainer'>
         <div className='searchBar'>
-          <img className='setting' src={settings} alt='settings'></img>
           <input
             className='searchInput'
             placeholder='Berlin'
@@ -155,11 +184,26 @@ class App extends Component {
             onKeyDown={this.onEnterPress}
           >
           </input>
-          <button onClick={this.onSearch}>
+          <button className='srcBtn' onClick={this.onSearch}>
             <img className='search' src={search} alt='search'></img>
           </button>
+          <Link
+          to={this.state.routeDir ? '/settings' : '/'}
+          className='setBtn'
+          >
+            <img onClick={this.setRoute} className='setting' src={settings} alt='settings'></img>
+          </Link>
         </div>
-        {cities}
+        <PoseGroup>
+          <RouteContainer key='anim'>
+            <Switch>
+              <Route exact path = '/' component={() => <CityList list={cities} />} key='home'/>
+              <Route path='/settings' component={() => <Settings scaleFoo={this.scaleChange} scale={this.state.scale} />} key='settings' />
+            </Switch>
+          </RouteContainer>
+        </PoseGroup>
+        {/* <CityList list={cities}/>
+        <Settings /> */}
         <SweetAlert
           show={this.state.cityNotFoundErr}
           type='error'
