@@ -215,7 +215,7 @@ class CityComp extends Component {
                 <div>
                   <div className='date3'>{nextDaysDate(3)}</div>
                   <img className='weather3' src={weatherDescrInNextDays(2)} alt='weather'></img>
-                  <div className='temp3'>{weatherInNextDays(2)}{this.props.scale ? '°F' : '°C'}°C</div>
+                  <div className='temp3'>{weatherInNextDays(2)}{this.props.scale ? '°F' : '°C'}</div>
                 </div>
               </div>
               <img onClick = {this.delete} className='removeCross' src={removeCross} alt='remove'></img>
