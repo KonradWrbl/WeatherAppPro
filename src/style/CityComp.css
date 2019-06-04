@@ -149,6 +149,105 @@
   opacity: .7;
 }
 
+@media (min-width: 1250px) {
+  .contentContainer1 {
+    padding: 3vh;
+    width: 100%;
+    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+            box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .contentContainer1 div p {
+    font-size: 3em;
+  }
+  .contentContainer1 .weather {
+    height: 40vw;
+  }
+  .contentContainer1 .city {
+    font-size: 5em;
+  }
+  .contentContainer1 .temperature :first-child {
+    font-size: 10em;
+  }
+  .contentContainer1 .temperature :nth-child(2) {
+    font-size: 3em;
+  }
+  .contentContainer1 .wind {
+    margin: .7em 0;
+    width: 100%;
+    height: 4em;
+    font-size: 1em;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+  }
+  .contentContainer1 .wind :first-child {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .contentContainer1 .wind :last-child {
+    text-align: center;
+  }
+  .contentContainer1 .wind img {
+    margin: 0 .3em;
+    height: 3em;
+    width: 3em;
+  }
+  .contentContainer1 .next3Days {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    text-align: center;
+  }
+  .contentContainer1 .next3Days div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .contentContainer1 .next3Days .date3 {
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+  .contentContainer1 .next3Days .temp3 {
+    font-weight: 700;
+    font-size: 3em;
+  }
+  .contentContainer1 .next3Days img {
+    width: 80%;
+  }
+  .contentContainer1 .removeCross {
+    margin: 15px;
+    position: absolute;
+    height: 6vw;
+    margin: 6vw;
+    right: 0;
+    top: 0;
+    opacity: .7;
+  }
+}
+
 .contentContainer2 {
   position: relative;
   opacity: .5;
@@ -291,5 +390,33 @@
   right: 0;
   top: 0;
   opacity: .5;
+}
+
+@media (min-width: 1250px) {
+  .contentContainer2 {
+    height: 15vw;
+  }
+  .contentContainer2 div p {
+    font-size: 20em;
+    font-weight: 700;
+    margin: 0;
+    padding: 0 1em 0 0;
+  }
+  .contentContainer2 .city {
+    font-size: 3em;
+  }
+  .contentContainer2 .temperature :first-child {
+    font-size: 4em;
+  }
+  .contentContainer2 .wind .bar {
+    display: none;
+  }
+  .contentContainer2 .wind img {
+    width: 85%;
+  }
+  .contentContainer2 .removeCross {
+    height: 2em;
+    margin: 2vw;
+  }
 }
 /*# sourceMappingURL=CityComp.css.map */

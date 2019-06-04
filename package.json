@@ -7,8 +7,6 @@
     "@babel/preset-react": "^7.0.0",
     "animate.css": "^3.7.1",
     "axios": "^0.18.0",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
     "react": "^16.8.6",
     "react-animated-css": "^1.2.1",
     "react-detect-offline": "^2.4.0",
@@ -41,9 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.2"
   }
 }

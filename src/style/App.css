@@ -110,10 +110,44 @@ html, body {
         -ms-flex-align: center;
             align-items: center;
   }
-  .searchBar img {
-    margin: 0 15px;
-    height: 80%;
+  .searchBar .setting {
+    height: 90%;
+  }
+  .searchBar .setBtn {
+    height: 100%;
+    width: 6vw;
+    border: none;
+    background: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .searchBar .setBtn img {
     opacity: .7;
+    height: 60%;
+  }
+  .searchBar .srcBtn {
+    position: absolute;
+    right: 6vw;
+    height: 100%;
+    border: none;
+    background: none;
+  }
+  .searchBar .srcBtn img {
+    opacity: .7;
+    height: 55%;
+  }
+  .searchBar .srcBtn .setting {
+    right: 20vw;
+    height: 45%;
+    border: none;
+    background: none;
   }
 }
 
@@ -127,19 +161,5 @@ html, body {
   font-weight: 700;
   font-size: 30px;
   padding: 0 20px;
-}
-
-@media (min-width: 1250px) {
-  .searchInput {
-    height: 100%;
-    width: 100%;
-    border: none;
-    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
-            box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
-    position: relative;
-    font-weight: 700;
-    font-size: 30px;
-    padding: 0 20px;
-  }
 }
 /*# sourceMappingURL=App.css.map */
